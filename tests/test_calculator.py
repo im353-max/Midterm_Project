@@ -352,3 +352,37 @@ class TestCalculatorSaveHistoryException(unittest.TestCase):
         output = mock_stdout.getvalue()
         self.assertIn("Error loading history: File not found", output)
         self.assertIn("Goodbye!", output)
+    
+    @patch('builtins.input', side_effect=['add', 'cancel', 'exit'])
+    @patch('app.operations.OperationFactory.create_operation')
+    @patch('app.calculator.Calculator')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cancel_first_number(self, mock_stdout, mock_calc, mock_create_operation, mock_input):
+    
+        mock_create_operation.return_value = "mock_operation"
+        mock_calc_instance = mock_calc.return_value
+
+        calculator_repl()
+
+        output = mock_stdout.getvalue()
+
+        self.assertIn("Operation cancelled", output)
+        self.assertIn("Goodbye!", output)
+        mock_calc_instance.perform_operation.assert_not_called()
+    
+    @patch('builtins.input', side_effect=['add', '5', 'cancel', 'exit'])
+    @patch('app.operations.OperationFactory.create_operation')
+    @patch('app.calculator.Calculator')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cancel_second_number(self, mock_stdout, mock_calc, mock_create_operation, mock_input):
+
+        mock_create_operation.return_value = "mock_operation"
+        mock_calc_instance = mock_calc.return_value
+
+        calculator_repl()
+
+        output = mock_stdout.getvalue()
+
+        self.assertIn("Operation cancelled", output)
+        self.assertIn("Goodbye!", output)
+        mock_calc_instance.perform_operation.assert_not_called()
