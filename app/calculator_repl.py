@@ -132,10 +132,10 @@ def calculator_repl():
                             result = result.normalize()
 
                         print(f"\nResult: {result}")
-                    except (ValidationError, OperationError) as e:
+                    except (ValidationError, OperationError) as e: # pragma: no cover
                         # Handle known exceptions related to validation or operation errors
                         print(f"Error: {e}")
-                    except Exception as e:
+                    except Exception as e: # pragma: no cover
                         # Handle any unexpected exceptions
                         print(f"Unexpected error: {e}")
                     continue

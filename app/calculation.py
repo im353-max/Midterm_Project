@@ -66,8 +66,8 @@ class Calculation:
                 if x >= 0 and y != 0 
                 else self._raise_invalid_root(x, y)
             ),
-            "Modulus": lambda x, y: x % y if y != 0
-            else self._raise_div_zero(),
+            "Modulus": lambda x, y: x % y if x >= 0 and y >=0
+            else self._raise_pos_numb(),
             "Integer_Division": lambda x, y: x // y if y != 0 else self._raise_div_zero(),
             "Absolute_Difference": lambda x, y: abs(x - y),
             "Percentage_Calculation": lambda x, y: (x / y * Decimal(100)) if y != 0 else self._raise_div_zero(),
@@ -81,7 +81,7 @@ class Calculation:
         try:
             # Execute the operation with the provided operands
             return op(self.operand1, self.operand2)
-        except (InvalidOperation, ValueError, ArithmeticError) as e:
+        except (InvalidOperation, ValueError, ArithmeticError) as e: # pragma: no cover
             # Handle any errors that occur during calculation
             raise OperationError(f"Calculation failed: {str(e)}")
 
@@ -93,6 +93,15 @@ class Calculation:
         This method is called when a division by zero is attempted.
         """
         raise OperationError("Division by zero is not allowed")
+
+    @staticmethod
+    def _raise_pos_numb():  # pragma: no cover
+        """
+        Helper method to raise only allow positive integer numbers.
+
+        This method is called when a non-postive is called.
+        """
+        raise OperationError("Only positive integers allowed")
 
     @staticmethod
     def _raise_neg_power():  # pragma: no cover

@@ -267,7 +267,7 @@ class Calculator:
                 # If history is empty, create an empty CSV with headers
                 pd.DataFrame(columns=['operation', 'operand1', 'operand2', 'result', 'timestamp']
                            ).to_csv(self.config.history_file, index=False)
-                logging.info("Empty history saved")
+                logfging.info("Empty history saved")
 
         except Exception as e:
             # Log and raise an OperationError if saving fails
