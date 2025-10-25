@@ -9,6 +9,7 @@ from app.calculator import Calculator
 from app.exceptions import OperationError, ValidationError
 from app.history import AutoSaveObserver, LoggingObserver
 from app.operations import OperationFactory
+from app.color import print_success, print_error, print_info, print_warning
 
 
 def calculator_repl():
@@ -50,10 +51,10 @@ def calculator_repl():
                     # Attempt to save history before exiting
                     try:
                         calc.save_history()
-                        print("History saved successfully.")
+                        print_info("History saved successfully.")
                     except Exception as e:
-                        print(f"Warning: Could not save history: {e}")
-                    print("Goodbye!")
+                        print_warning(f"Warning: Could not save history: {e}")
+                    print_info("Goodbye!")
                     break
 
                 if command == 'history':
