@@ -61,9 +61,9 @@ def calculator_repl():
                     # Display calculation history
                     history = calc.show_history()
                     if not history:
-                        print("No calculations in history")
+                        print_warning("No calculations in history")
                     else:
-                        print("\nCalculation History:")
+                        print_info("\nCalculation History:")
                         for i, entry in enumerate(history, 1):
                             print(f"{i}. {entry}")
                     continue
@@ -71,54 +71,54 @@ def calculator_repl():
                 if command == 'clear':
                     # Clear calculation history
                     calc.clear_history()
-                    print("History cleared")
+                    print_info("History cleared")
                     continue
 
                 if command == 'undo':
                     # Undo the last calculation
                     if calc.undo():
-                        print("Operation undone")
+                        print_success("Operation undone")
                     else:
-                        print("Nothing to undo")
+                        print_info("Nothing to undo")
                     continue
 
                 if command == 'redo':
                     # Redo the last undone calculation
                     if calc.redo():
-                        print("Operation redone")
+                        print_success("Operation redone")
                     else:
-                        print("Nothing to redo")
+                        print_info("Nothing to redo")
                     continue
 
                 if command == 'save':
                     # Save calculation history to file
                     try:
                         calc.save_history()
-                        print("History saved successfully")
+                        print_success("History saved successfully")
                     except Exception as e:
-                        print(f"Error saving history: {e}")
+                        print_error(f"Error saving history: {e}")
                     continue
 
                 if command == 'load':
                     # Load calculation history from file
                     try:
                         calc.load_history()
-                        print("History loaded successfully")
+                        print_success("History loaded successfully")
                     except Exception as e:
-                        print(f"Error loading history: {e}")
+                        print_error(f"Error loading history: {e}")
                     continue
 
                 if command in ['add', 'subtract', 'multiply', 'divide', 'power', 'root', 'modulus', 'int_divide', 'percent', 'abs_diff']:
                     # Perform the specified arithmetic operation
                     try:
-                        print("\nEnter numbers (or 'cancel' to abort):")
+                        print_info("\nEnter numbers (or 'cancel' to abort):")
                         a = input("First number: ")
                         if a.lower() == 'cancel':
-                            print("Operation cancelled")
+                            print_info("Operation cancelled")
                             continue
                         b = input("Second number: ")
                         if b.lower() == 'cancel':
-                            print("Operation cancelled")
+                            print_info("Operation cancelled")
                             continue
 
                         # Create the appropriate operation instance using the Factory pattern
@@ -132,13 +132,13 @@ def calculator_repl():
                         if isinstance(result, Decimal):
                             result = result.normalize()
 
-                        print(f"\nResult: {result}")
+                        print_success(f"\nResult: {result}")
                     except (ValidationError, OperationError) as e: # pragma: no cover
                         # Handle known exceptions related to validation or operation errors
-                        print(f"Error: {e}")
+                        print_error(f"Error: {e}")
                     except Exception as e: # pragma: no cover
                         # Handle any unexpected exceptions
-                        print(f"Unexpected error: {e}")
+                        print_error(f"Unexpected error: {e}")
                     continue
 
                 # Handle unknown commands
@@ -146,19 +146,19 @@ def calculator_repl():
 
             except KeyboardInterrupt:
                 # Handle Ctrl+C interruption gracefully
-                print("\nOperation cancelled")
+                print_info("\nOperation cancelled")
                 continue
             except EOFError:
                 # Handle end-of-file (e.g., Ctrl+D) gracefully
-                print("\nInput terminated. Exiting...")
+                print_info("\nInput terminated. Exiting...")
                 break
             except Exception as e:
                 # Handle any other unexpected exceptions
-                print(f"Error: {e}")
+                print_error(f"Error: {e}")
                 continue
 
     except Exception as e:
         # Handle fatal errors during initialization
-        print(f"Fatal error: {e}")
+        print_error(f"Fatal error: {e}")
         logging.error(f"Fatal error in calculator REPL: {e}")
         raise

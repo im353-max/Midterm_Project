@@ -17,6 +17,7 @@ from app.exceptions import OperationError, ValidationError
 from app.history import HistoryObserver
 from app.input_validators import InputValidator
 from app.operations import Operation
+from app.color import print_success, print_error, print_info, print_warning
 
 # Type aliases for better readability
 Number = Union[int, float, Decimal]
@@ -102,7 +103,7 @@ class Calculator:
             logging.info(f"Logging initialized at: {log_file}")
         except Exception as e:
             # Print an error message and re-raise the exception if logging setup fails
-            print(f"Error setting up logging: {e}")
+            print_error(f"Error setting up logging: {e}")
             raise
 
     def _setup_directories(self) -> None:
