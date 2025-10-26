@@ -1,3 +1,28 @@
+
+Project Description: Overview of the calculator application and its features.
+Installation Instructions: Steps to set up the virtual environment and install dependencies.
+
+The Advanced Calculator is a command-line application that performs a wide range of arithmetic operations with features like undo/redo, history tracking, and automatic logging. To start the calculator, activate your virtual environment, ensure all dependencies are installed, and run python -m app.calculator. This will launch the REPL (Read-Eval-Print Loop) interface, where you can type commands interactively.
+
+Configuration Setup: Instructions on creating and configuring the .env file with necessary environment variables.
+
+In the project’s root directory, you can use the example .env from the github repository, and adjust as needy.
+
+Usage Guide: Detailed explanation of how to use the command-line interface and its supported commands.
+
+The calculator supports operations such as add, subtract, multiply, divide, power, root, modulus, int_divide, percent, and abs_diff. It also provides utility commands like history (view past calculations), undo and redo (revert or reapply actions), save and load (manage calculation history using CSV files), clear (reset history), and exit (quit the application). Errors such as invalid inputs or division by zero are handled gracefully, with clear messages to guide the user.
+
+Testing Instructions: How to run unit tests and check test coverage.
+
+You can download the application and run pytest, and the github actions runs the tests automatically too.
+
+CI/CD Information: Overview of GitHub Actions workflow and its purpose.
+
+The primary purpose of github actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and pipeline. In your github repository, a yaml file defines how your github action runs testing for your configuration.
+
+Usually your yaml file is located in .github/workflows directory. The yaml file runs automatically whenever code is pushed to or a pull request targets the master branch. It defines a single job called test that runs on the latest Ubuntu virtual environment. The workflow first checks out the repository’s code, then sets up Python 3.x on the runner. Next, it installs the project dependencies from requirements.txt and ensures that pytest and pytest-cov are available. Finally, it runs the test suite using pytest, measures code coverage for the app directory, and fails the job if the total coverage falls below 90%. Essentially, it provides automated testing with strict coverage enforcement for your Python project. 
+
+
 # 📦 Project Setup
 
 ---
