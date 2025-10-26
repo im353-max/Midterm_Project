@@ -1,22 +1,27 @@
 
-Project Description: Overview of the calculator application and its features.
-Installation Instructions: Steps to set up the virtual environment and install dependencies.
+Project Description: 
 
-The Advanced Calculator is a command-line application that performs a wide range of arithmetic operations with features like undo/redo, history tracking, and automatic logging. To start the calculator, activate your virtual environment, ensure all dependencies are installed, and run python -m app.calculator. This will launch the REPL (Read-Eval-Print Loop) interface, where you can type commands interactively.
+The Advanced Calculator is a command-line application that performs a wide range of arithmetic operations with features like undo/redo, history tracking, automatic logging, and color outputs. 
 
-Configuration Setup: Instructions on creating and configuring the .env file with necessary environment variables.
+Configuration Setup: 
 
 In the project’s root directory, you can use the example .env from the github repository, and adjust as needy.
 
-Usage Guide: Detailed explanation of how to use the command-line interface and its supported commands.
+Usage Guide: 
+
+The Advanced Calculator is a command-line application that performs a wide range of arithmetic operations with features like undo/redo, history tracking, and automatic logging. To start the calculator, activate your virtual environment, ensure all dependencies are installed, and run python -m app.calculator. This will launch the REPL (Read-Eval-Print Loop) interface, where you can type commands interactively.
 
 The calculator supports operations such as add, subtract, multiply, divide, power, root, modulus, int_divide, percent, and abs_diff. It also provides utility commands like history (view past calculations), undo and redo (revert or reapply actions), save and load (manage calculation history using CSV files), clear (reset history), and exit (quit the application). Errors such as invalid inputs or division by zero are handled gracefully, with clear messages to guide the user.
 
-Testing Instructions: How to run unit tests and check test coverage.
+Configuration settings are managed via a .env file, allowing customization of directories, precision, and auto-save options. The application also implements observers for logging and auto-saving, ensuring that each calculation is recorded and saved automatically. Logging and history files are stored in the directories defined in the .env configuration.
+
+All core functionalities are backed by comprehensive unit tests located in the tests/ directory. You can run tests with pytest --cov=app to verify correctness and ensure a minimum of 90% code coverage. Continuous Integration is handled through GitHub Actions (python-app.yml), which automatically installs dependencies, runs tests, and enforces the coverage threshold on every push or pull request.
+
+Testing Instructions: 
 
 You can download the application and run pytest, and the github actions runs the tests automatically too.
 
-CI/CD Information: Overview of GitHub Actions workflow and its purpose.
+CI/CD Information: 
 
 The primary purpose of github actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your build, test, and pipeline. In your github repository, a yaml file defines how your github action runs testing for your configuration.
 
